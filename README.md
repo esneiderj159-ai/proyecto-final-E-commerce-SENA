@@ -3,7 +3,7 @@
 > **Actividad:** Proyecto Final Integrador — Construcción y Despliegue de Sistema Backend  
 > **Programa:** Tecnología en Análisis y Desarrollo de Software  
 > **Instructor:** Mateo  
-> **Integrantes:** Angel Gabriel Villada Jiménez y Erick Sneider Jiménez López  
+> **Integrantes:** Angel Gabriel Villada Jiménez, sneider lopez, diego andre bermudez, diego rojas   
 > **Ficha:** 3229209  
 > **Dominio:** E-commerce
 
