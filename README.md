@@ -1,17 +1,19 @@
 # 🛒 API REST E-commerce — Proyecto Final SENA
 
-> **Actividad:** Proyecto Final Integrador — Construcción y Despliegue de Sistema Backend  
-> **Programa:** Tecnología en Análisis y Desarrollo de Software  
-> **Instructor:** Mateo  
-> **Integrantes:** Angel Gabriel Villada Jiménez , Erick Sneider Jiménez López, DIEGO ROJAS, DIEGO BERMUDEZ  
-> **Ficha:** 3229209  
+> **Actividad:** Proyecto Final Integrador — Construcción y Despliegue de Sistema Backend
+> **Programa:** Tecnología en Análisis y Desarrollo de Software
+> **Instructor:** Mateo Arroyave
+> **Integrantes:** Angel Gabriel Villada Jiménez, Erick Sneider Jiménez López, Diego Rojas, Diego Bermudez
+> **Ficha:** 3229209
 > **Dominio elegido:** E-commerce
 
 ---
 
 ## 📋 Descripción del Proyecto
 
-Sistema backend completo para una tienda en línea (E-commerce). Permite gestionar usuarios registrados, un catálogo de productos organizados por categorías, pedidos con sus ítems detallados, pagos asociados a cada pedido, y reseñas de productos escritas por usuarios. Construido con Node.js, Express.js y SQLite como base de datos relacional, y desplegado en producción usando Render.com.
+Sistema backend completo para una tienda en línea (E-commerce). Permite gestionar usuarios registrados, un catálogo de productos organizados por categorías, pedidos con sus ítems detallados, pagos asociados a cada pedido, y reseñas de productos escritas por usuarios.
+
+Construido con **Node.js**, **Express.js** y **SQLite** como base de datos relacional, desplegado en producción usando **Render.com**.
 
 ---
 
@@ -21,13 +23,13 @@ Sistema backend completo para una tienda en línea (E-commerce). Permite gestion
 https://proyecto-final-e-commerce-sena.onrender.com
 ```
 
-> ⚠️ El plan gratuito de Render suspende el servidor tras 15 minutos de inactividad. La primera petición después de una pausa puede tardar hasta 60 segundos (cold start). Esto es completamente normal — simplemente espera y vuelve a intentar.
+> ⚠️ El plan gratuito de Render suspende el servidor tras 15 minutos de inactividad. La primera petición puede tardar hasta 60 segundos (cold start). Esto es completamente normal.
 
 ---
 
 ## 🔐 Autenticación
 
-Todos los endpoints del sistema requieren el siguiente header en cada petición. Sin él, la API rechazará el acceso automáticamente.
+Todos los endpoints requieren el siguiente header en cada petición:
 
 ```
 password: EcommerceSeguro2024
@@ -42,7 +44,7 @@ password: EcommerceSeguro2024
 
 ## 🗄️ Modelo de Datos — Diagrama Entidad-Relación
 
-El sistema está compuesto por 7 tablas relacionadas entre sí mediante llaves foráneas (FK). Las relaciones más importantes son: una categoría tiene muchos productos (1:N), un usuario hace muchos pedidos (1:N), un pedido tiene muchos productos a través de la tabla `detalle_pedidos` que resuelve la relación N:M, un pedido tiene exactamente un pago (1:1), y un usuario puede escribir muchas reseñas sobre muchos productos (N:M).
+El sistema tiene **7 tablas** relacionadas entre sí:
 
 ```
 categorias (PK: id)
@@ -51,11 +53,11 @@ categorias (PK: id)
     ▼
 productos (PK: id, FK: categoriaId → categorias.id)
     │                        │
-    │ N:M                    │ N:M
+    │ 1:N                    │ 1:N
     ▼                        ▼
 detalle_pedidos           resenas
-(FK: pedidoId,            (FK: usuarioId → usuarios.id,
- FK: productoId)           FK: productoId → productos.id)
+(FK: pedidoId              (FK: usuarioId → usuarios.id
+ FK: productoId)            FK: productoId → productos.id)
     │
     ▼
 pedidos (PK: id, FK: usuarioId → usuarios.id)
@@ -65,6 +67,13 @@ pedidos (PK: id, FK: usuarioId → usuarios.id)
 pagos                 usuarios (PK: id)
 (FK: pedidoId)
 ```
+
+### Relaciones principales
+- Una **categoría** tiene muchos **productos** (1:N)
+- Un **usuario** hace muchos **pedidos** (1:N)
+- Un **pedido** tiene muchos **productos** a través de **detalle_pedidos** (N:M)
+- Un **pedido** tiene exactamente un **pago** (1:1)
+- Un **usuario** puede escribir muchas **reseñas** (1:N)
 
 ---
 
@@ -77,7 +86,7 @@ pagos                 usuarios (PK: id)
 | nombre | TEXT | NOT NULL | Nombre completo |
 | email | TEXT | NOT NULL UNIQUE | Correo (no puede repetirse) |
 | password | TEXT | NOT NULL | Contraseña |
-| rol | TEXT | CHECK(admin,cliente,vendedor) | Rol en el sistema |
+| rol | TEXT | CHECK(admin, cliente, vendedor) | Rol en el sistema |
 | activo | INTEGER | DEFAULT 1, CHECK(0,1) | 1=activo, 0=inactivo |
 | createdAt | TEXT | DEFAULT datetime('now') | Fecha de registro |
 
@@ -106,7 +115,7 @@ pagos                 usuarios (PK: id)
 | id | INTEGER PK | AUTOINCREMENT | Identificador único |
 | usuarioId | INTEGER FK | → usuarios.id | Usuario que realizó el pedido |
 | total | REAL | DEFAULT 0, CHECK(>=0) | Total calculado automáticamente |
-| estado | TEXT | CHECK(pendiente,procesando,enviado,entregado,cancelado) | Estado actual |
+| estado | TEXT | CHECK(pendiente, procesando, enviado, entregado, cancelado) | Estado actual |
 | fecha | TEXT | DEFAULT datetime('now') | Fecha de creación |
 
 ### Tabla 5: `detalle_pedidos`
@@ -125,8 +134,8 @@ pagos                 usuarios (PK: id)
 | id | INTEGER PK | AUTOINCREMENT | Identificador único |
 | pedidoId | INTEGER FK | → pedidos.id UNIQUE | Pedido pagado (1:1) |
 | monto | REAL | NOT NULL, CHECK(>0) | Monto del pago |
-| metodo | TEXT | CHECK(efectivo,tarjeta,transferencia,nequi,daviplata) | Método de pago |
-| estado | TEXT | CHECK(pendiente,aprobado,rechazado,reembolsado) | Estado del pago |
+| metodo | TEXT | CHECK(efectivo, tarjeta, transferencia, nequi, daviplata) | Método de pago |
+| estado | TEXT | CHECK(pendiente, aprobado, rechazado, reembolsado) | Estado del pago |
 | fecha | TEXT | DEFAULT datetime('now') | Fecha del pago |
 
 ### Tabla 7: `resenas`
@@ -143,7 +152,7 @@ pagos                 usuarios (PK: id)
 
 ## 📌 Endpoints — 35 en total (7 tablas × 5 métodos)
 
-**Base URL producción:** `https://proyecto-final-e-commerce-sena.onrender.com`  
+**Base URL:** `https://proyecto-final-e-commerce-sena.onrender.com`
 **Header requerido en todas las peticiones:** `password: EcommerceSeguro2024`
 
 ### 👤 Usuarios `/usuarios`
@@ -211,7 +220,7 @@ pagos                 usuarios (PK: id)
 
 ---
 
-## 💻 Ejemplo con curl
+## 💻 Ejemplos de uso
 
 ```bash
 # Listar todos los productos
@@ -223,24 +232,46 @@ curl -X POST https://proyecto-final-e-commerce-sena.onrender.com/categorias \
   -H "password: EcommerceSeguro2024" \
   -H "Content-Type: application/json" \
   -d '{"nombre":"Tecnología","descripcion":"Dispositivos electrónicos"}'
+
+# Crear un usuario
+curl -X POST https://proyecto-final-e-commerce-sena.onrender.com/usuarios \
+  -H "password: EcommerceSeguro2024" \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Juan Pérez","email":"juan@email.com","password":"123456","rol":"cliente"}'
+
+# Crear un pedido
+curl -X POST https://proyecto-final-e-commerce-sena.onrender.com/pedidos \
+  -H "password: EcommerceSeguro2024" \
+  -H "Content-Type: application/json" \
+  -d '{"usuarioId":1,"productos":[{"productoId":1,"cantidad":2,"precioUnit":2500000}]}'
 ```
 
 ---
 
 ## 🧪 Orden correcto para insertar datos
 
-Dado que las tablas tienen relaciones entre sí, es fundamental respetar el siguiente orden para no violar las restricciones de llaves foráneas: primero categorías y usuarios (no dependen de nada), luego productos (necesitan categoriaId), después pedidos (necesitan usuarioId), luego detalles (necesitan pedidoId y productoId), después pagos (necesitan pedidoId) y finalmente reseñas (necesitan usuarioId y productoId).
+Respetar este orden para no violar las restricciones de llaves foráneas:
+
+1. **Categorías** — no dependen de nada
+2. **Usuarios** — no dependen de nada
+3. **Productos** — necesitan `categoriaId`
+4. **Pedidos** — necesitan `usuarioId`
+5. **Detalle pedidos** — necesitan `pedidoId` y `productoId`
+6. **Pagos** — necesitan `pedidoId`
+7. **Reseñas** — necesitan `usuarioId` y `productoId`
 
 ---
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Node.js** v18+ — Entorno de ejecución JavaScript en el servidor
-- **Express.js** v4.22+ — Framework para construir APIs REST
-- **SQLite3** v5.1+ — Base de datos relacional en archivo local
-- **dotenv** v16+ — Gestión segura de variables de entorno
-- **Render.com** — Plataforma de despliegue en la nube (plan gratuito)
-- **Postman** — Herramienta para pruebas de endpoints
+| Tecnología | Versión | Uso |
+|---|---|---|
+| Node.js | v18+ | Entorno de ejecución |
+| Express.js | v4.22+ | Framework REST API |
+| SQLite3 | v5.1+ | Base de datos relacional |
+| dotenv | v16+ | Variables de entorno |
+| Render.com | — | Despliegue en la nube |
+| Postman | — | Pruebas de endpoints |
 
 ---
 
@@ -254,19 +285,23 @@ cd proyecto-final-E-commerce-SENA
 # 2. Instalar dependencias
 npm install
 
-# 3. Crear archivo .env en la raíz con este contenido:
-# PORT=3000
-# API_PASSWORD=EcommerceSeguro2024
-# NODE_ENV=development
+# 3. Crear archivo .env en la raíz
+echo "PORT=3000" > .env
+echo "API_PASSWORD=EcommerceSeguro2024" >> .env
+echo "NODE_ENV=development" >> .env
 
 # 4. Ejecutar el servidor
 npm start
+
 # El servidor corre en http://localhost:3000
 # La base de datos database.db se crea automáticamente
 ```
 
 ---
 
-## 📝 Notas
+## 📝 Notas Importantes
 
-Los datos se almacenan de forma persistente en SQLite localmente. En Render con plan gratuito, los datos se pierden al redesplegar — este comportamiento es normal en entornos de desarrollo. Los archivos `database.db`, `node_modules/` y `.env` están excluidos del repositorio mediante `.gitignore`.
+- Los datos se almacenan de forma persistente en SQLite localmente.
+- En Render con plan gratuito, los datos se reinician al redesplegar — comportamiento normal en desarrollo.
+- Los archivos `database.db`, `node_modules/` y `.env` están excluidos del repositorio mediante `.gitignore`.
+- El servidor incluye datos iniciales (seed) que se insertan automáticamente si la base de datos está vacía.
