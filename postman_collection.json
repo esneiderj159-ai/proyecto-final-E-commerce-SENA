@@ -1,0 +1,655 @@
+{
+  "info": {
+    "_postman_id": "39ccdbf2-59bd-4196-bea2-f6150d6c9ceb",
+    "name": "E-commerce",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": " CATEGORIAS",
+      "item": [
+        {
+          "name": "GET - Listar categorias",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/categorias",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["categorias"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener categoria por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/categorias/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["categorias", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear categoria",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nombre\": \"Tecnología\", \"descripcion\": \"Dispositivos electrónicos\" }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/categorias",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["categorias"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar categoria",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nombre\": \"Tecnología y Electrónica\", \"descripcion\": \"Dispositivos y gadgets\", \"activa\": 1 }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/categorias/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["categorias", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar categoria",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/categorias/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["categorias", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": " USUARIOS",
+      "item": [
+        {
+          "name": "GET - Listar usuarios",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/usuarios",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["usuarios"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener usuario por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/usuarios/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["usuarios", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nombre\": \"Juan Pérez\", \"email\": \"juan@email.com\", \"password\": \"123456\", \"rol\": \"cliente\" }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/usuarios",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["usuarios"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nombre\": \"Juan Pérez Actualizado\", \"rol\": \"vendedor\", \"activo\": 1 }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/usuarios/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["usuarios", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar usuario",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/usuarios/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["usuarios", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": " PRODUCTOS",
+      "item": [
+        {
+          "name": "GET - Listar productos",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/productos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["productos"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener producto por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/productos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["productos", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nombre\": \"Laptop HP\", \"descripcion\": \"Laptop de alto rendimiento\", \"precio\": 2500000, \"stock\": 10, \"categoriaId\": 1 }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/productos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["productos"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar producto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nombre\": \"Laptop HP Actualizada\", \"precio\": 2800000, \"stock\": 5 }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/productos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["productos", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar producto",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/productos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["productos", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": " PEDIDOS",
+      "item": [
+        {
+          "name": "GET - Listar pedidos",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pedidos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pedidos"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener pedido por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pedidos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pedidos", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear pedido",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"usuarioId\": 1, \"productos\": [{ \"productoId\": 1, \"cantidad\": 1, \"precioUnit\": 2500000 }] }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pedidos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pedidos"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar estado pedido",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"estado\": \"enviado\" }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pedidos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pedidos", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar pedido",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pedidos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pedidos", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": " DETALLE PEDIDOS",
+      "item": [
+        {
+          "name": "GET - Listar detalles",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/detalle-pedidos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["detalle-pedidos"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener detalle por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/detalle-pedidos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["detalle-pedidos", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear detalle pedido",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"pedidoId\": 1, \"productoId\": 1, \"cantidad\": 2, \"precioUnit\": 2500000 }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/detalle-pedidos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["detalle-pedidos"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar detalle pedido",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"cantidad\": 3, \"precioUnit\": 2500000 }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/detalle-pedidos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["detalle-pedidos", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar detalle pedido",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/detalle-pedidos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["detalle-pedidos", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": " PAGOS",
+      "item": [
+        {
+          "name": "GET - Listar pagos",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pagos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pagos"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener pago por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pagos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pagos", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Registrar pago",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"pedidoId\": 1, \"monto\": 2500000, \"metodo\": \"tarjeta\" }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pagos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pagos"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar pago",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"estado\": \"aprobado\", \"metodo\": \"nequi\" }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pagos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pagos", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar pago",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/pagos/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["pagos", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": " RESENAS",
+      "item": [
+        {
+          "name": "GET - Listar reseñas",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/resenas",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["resenas"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener reseña por ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/resenas/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["resenas", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST - Escribir reseña",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"usuarioId\": 1, \"productoId\": 1, \"calificacion\": 5, \"comentario\": \"Excelente producto\" }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/resenas",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["resenas"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar reseña",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "password", "value": "EcommerceSeguro2024", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"calificacion\": 4, \"comentario\": \"Muy buen producto, lo recomiendo\" }",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/resenas/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["resenas", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar reseña",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/resenas/1",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["resenas", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔐 ERRORES DE AUTENTICACION",
+      "item": [
+        {
+          "name": "401 - Sin header password",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/productos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["productos"]
+            }
+          }
+        },
+        {
+          "name": "403 - Password incorrecta",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "passwordIncorrecta123", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/productos",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["productos"]
+            }
+          }
+        },
+        {
+          "name": "404 - ID no existe",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "password", "value": "EcommerceSeguro2024", "type": "text" }],
+            "url": {
+              "raw": "https://proyecto-final-e-commerce-sena.onrender.com/usuarios/999",
+              "protocol": "https",
+              "host": ["proyecto-final-e-commerce-sena", "onrender", "com"],
+              "path": ["usuarios", "999"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
