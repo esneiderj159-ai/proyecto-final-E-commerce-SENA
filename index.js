@@ -40,13 +40,13 @@ app.use((req, res, next) => {
 // ═══════════════════════════════════════════════════════════════
 // REGISTRO DE RUTAS — 7 tablas del E-commerce
 // ═══════════════════════════════════════════════════════════════
-app.use('/usuarios',        require('./routes/usuarios'));
-app.use('/categorias',      require('./routes/categorias'));
-app.use('/productos',       require('./routes/productos'));
-app.use('/pedidos',         require('./routes/pedidos'));
-app.use('/detalle-pedidos', require('./routes/detalle_pedidos'));
-app.use('/pagos',           require('./routes/pagos'));
-app.use('/resenas',         require('./routes/resenas'));
+app.use('/api/usuarios',        require('./routes/usuarios'));
+app.use('/api/categorias',      require('./routes/categorias'));
+app.use('/api/productos',       require('./routes/productos'));
+app.use('/api/pedidos',         require('./routes/pedidos'));
+app.use('/api/detalle-pedidos', require('./routes/detalle_pedidos'));
+app.use('/api/pagos',           require('./routes/pagos'));
+app.use('/api/resenas',         require('./routes/resenas'));
 
 // Ruta principal — información del sistema
 app.get('/', (req, res) => {
