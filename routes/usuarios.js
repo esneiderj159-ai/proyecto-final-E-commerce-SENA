@@ -1,4 +1,3 @@
-// routes/usuarios.js — CRUD completo para la tabla usuarios
 const express = require('express');
 const router  = express.Router();
 const db      = require('../db');
@@ -122,16 +121,45 @@ router.put('/:id', (req, res) => {
 });
 
 // ══════════════════════════════════════════════════════
-// DELETE /usuarios/:id — Eliminar usuario
+// DELETE /usuarios/:id — Eliminar usuario junto con datos relacionados
 // ══════════════════════════════════════════════════════
 router.delete('/:id', (req, res) => {
-  db.get('SELECT * FROM usuarios WHERE id = ?', [req.params.id], (err, row) => {
-    if (err) return res.status(500).json({ success: false, message: err.message });
-    if (!row) return res.status(404).json({ success: false, message: `Usuario con id ${req.params.id} no encontrado` });
+  const id = req.params.id;
 
-    db.run('DELETE FROM usuarios WHERE id = ?', [req.params.id], (err) => {
-      if (err) return res.status(500).json({ success: false, message: err.message });
-      res.json({ success: true, message: 'Usuario eliminado correctamente', data: row });
+  db.get('SELECT * FROM usuarios WHERE id = ?', [id], (err, usuario) => {
+    if (err) return res.status(500).json({ success: false, message: err.message });
+    if (!usuario) return res.status(404).json({ success: false, message: `Usuario con id ${id} no encontrado` });
+
+    db.serialize(() => {
+      // Borrar pagos relacionados con pedidos del usuario
+      db.run(
+        `DELETE FROM pagos WHERE pedidoId IN (SELECT id FROM pedidos WHERE usuarioId = ?)`,
+        [id]
+      );
+
+      // Borrar detalles de pedidos relacionados con pedidos del usuario
+      db.run(
+        `DELETE FROM detalle_pedidos WHERE pedidoId IN (SELECT id FROM pedidos WHERE usuarioId = ?)`,
+        [id]
+      );
+
+      // Borrar pedidos del usuario
+      db.run(
+        `DELETE FROM pedidos WHERE usuarioId = ?`,
+        [id]
+      );
+
+      // Borrar reseñas del usuario
+      db.run(
+        `DELETE FROM resenas WHERE usuarioId = ?`,
+        [id]
+      );
+
+      // Finalmente borrar usuario
+      db.run('DELETE FROM usuarios WHERE id = ?', [id], function(err) {
+        if (err) return res.status(500).json({ success: false, message: err.message });
+        res.json({ success: true, message: 'Usuario eliminado correctamente', data: usuario });
+      });
     });
   });
 });

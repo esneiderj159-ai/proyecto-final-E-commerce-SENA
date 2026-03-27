@@ -1,7 +1,3 @@
-// db.js — Conexión a SQLite y creación de las 7 tablas del E-commerce
-// Se importa en index.js y en cada archivo de rutas.
-// SQLite crea database.db automáticamente si no existe.
-
 const sqlite3 = require('sqlite3').verbose();
 
 const db = new sqlite3.Database('./database.db', (err) => {
@@ -14,8 +10,6 @@ db.run('PRAGMA foreign_keys = ON');
 
 // ─────────────────────────────────────────────────────────────
 // TABLA 1: usuarios
-// Tabla raíz — no depende de ninguna otra tabla.
-// Un usuario puede hacer muchos pedidos y escribir muchas reseñas.
 // ─────────────────────────────────────────────────────────────
 db.run(`
   CREATE TABLE IF NOT EXISTS usuarios (
@@ -32,8 +26,6 @@ db.run(`
 
 // ─────────────────────────────────────────────────────────────
 // TABLA 2: categorias
-// Tabla raíz — no depende de ninguna otra.
-// Una categoría puede tener muchos productos.
 // ─────────────────────────────────────────────────────────────
 db.run(`
   CREATE TABLE IF NOT EXISTS categorias (
@@ -46,9 +38,6 @@ db.run(`
 
 // ─────────────────────────────────────────────────────────────
 // TABLA 3: productos
-// FK: categoriaId → categorias.id
-// Un producto pertenece a una categoría y puede estar en muchos
-// detalles de pedido y muchas reseñas.
 // ─────────────────────────────────────────────────────────────
 db.run(`
   CREATE TABLE IF NOT EXISTS productos (
@@ -59,15 +48,12 @@ db.run(`
     stock       INTEGER NOT NULL DEFAULT 0 CHECK(stock >= 0),
     categoriaId INTEGER NOT NULL,
     activo      INTEGER NOT NULL DEFAULT 1 CHECK(activo IN (0, 1)),
-    FOREIGN KEY (categoriaId) REFERENCES categorias(id)
+    FOREIGN KEY (categoriaId) REFERENCES categorias(id) ON DELETE CASCADE
   )
 `, (err) => { if (err) console.error('Error creando tabla productos:', err.message); });
 
 // ─────────────────────────────────────────────────────────────
 // TABLA 4: pedidos
-// FK: usuarioId → usuarios.id
-// Un pedido pertenece a un usuario. Un pedido puede tener
-// muchos detalles y un pago.
 // ─────────────────────────────────────────────────────────────
 db.run(`
   CREATE TABLE IF NOT EXISTS pedidos (
@@ -77,15 +63,12 @@ db.run(`
     estado    TEXT    NOT NULL DEFAULT 'pendiente'
               CHECK(estado IN ('pendiente', 'procesando', 'enviado', 'entregado', 'cancelado')),
     fecha     TEXT    NOT NULL DEFAULT (datetime('now')),
-    FOREIGN KEY (usuarioId) REFERENCES usuarios(id)
+    FOREIGN KEY (usuarioId) REFERENCES usuarios(id) ON DELETE CASCADE
   )
 `, (err) => { if (err) console.error('Error creando tabla pedidos:', err.message); });
 
 // ─────────────────────────────────────────────────────────────
-// TABLA 5: detalle_pedidos  (tabla intermedia N:M entre pedidos y productos)
-// FK: pedidoId → pedidos.id
-// FK: productoId → productos.id
-// Resuelve la relación muchos a muchos entre pedidos y productos.
+// TABLA 5: detalle_pedidos
 // ─────────────────────────────────────────────────────────────
 db.run(`
   CREATE TABLE IF NOT EXISTS detalle_pedidos (
@@ -95,15 +78,13 @@ db.run(`
     cantidad   INTEGER NOT NULL CHECK(cantidad > 0),
     precioUnit REAL    NOT NULL CHECK(precioUnit > 0),
     subtotal   REAL    NOT NULL CHECK(subtotal > 0),
-    FOREIGN KEY (pedidoId)   REFERENCES pedidos(id),
-    FOREIGN KEY (productoId) REFERENCES productos(id)
+    FOREIGN KEY (pedidoId)   REFERENCES pedidos(id) ON DELETE CASCADE,
+    FOREIGN KEY (productoId) REFERENCES productos(id) ON DELETE CASCADE
   )
 `, (err) => { if (err) console.error('Error creando tabla detalle_pedidos:', err.message); });
 
 // ─────────────────────────────────────────────────────────────
 // TABLA 6: pagos
-// FK: pedidoId → pedidos.id
-// Un pedido tiene un pago. Guarda el método y estado del cobro.
 // ─────────────────────────────────────────────────────────────
 db.run(`
   CREATE TABLE IF NOT EXISTS pagos (
@@ -115,27 +96,23 @@ db.run(`
     estado   TEXT    NOT NULL DEFAULT 'pendiente'
              CHECK(estado IN ('pendiente', 'aprobado', 'rechazado', 'reembolsado')),
     fecha    TEXT    NOT NULL DEFAULT (datetime('now')),
-    FOREIGN KEY (pedidoId) REFERENCES pedidos(id)
+    FOREIGN KEY (pedidoId) REFERENCES pedidos(id) ON DELETE CASCADE
   )
 `, (err) => { if (err) console.error('Error creando tabla pagos:', err.message); });
 
 // ─────────────────────────────────────────────────────────────
 // TABLA 7: resenas
-// FK: usuarioId → usuarios.id
-// FK: productoId → productos.id
-// Un usuario puede reseñar muchos productos.
-// Un producto puede tener muchas reseñas.
 // ─────────────────────────────────────────────────────────────
 db.run(`
   CREATE TABLE IF NOT EXISTS resenas (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    usuarioId   INTEGER NOT NULL,
-    productoId  INTEGER NOT NULL,
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuarioId    INTEGER NOT NULL,
+    productoId   INTEGER NOT NULL,
     calificacion INTEGER NOT NULL CHECK(calificacion BETWEEN 1 AND 5),
-    comentario  TEXT    DEFAULT '',
-    fecha       TEXT    NOT NULL DEFAULT (datetime('now')),
-    FOREIGN KEY (usuarioId)  REFERENCES usuarios(id),
-    FOREIGN KEY (productoId) REFERENCES productos(id)
+    comentario   TEXT    DEFAULT '',
+    fecha        TEXT    NOT NULL DEFAULT (datetime('now')),
+    FOREIGN KEY (usuarioId)  REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (productoId) REFERENCES productos(id) ON DELETE CASCADE
   )
 `, (err) => { if (err) console.error('Error creando tabla resenas:', err.message); });
 
