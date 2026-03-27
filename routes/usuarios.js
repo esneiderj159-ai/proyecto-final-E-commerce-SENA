@@ -64,10 +64,9 @@ router.post('/', (req, res) => {
   }
 
   // 4. Unicidad del email
-  db.get('SELECT id FROM usuarios WHERE email = ?', [email.toLowerCase()], (err, row) => {
-    if (err) return res.status(500).json({ success: false, message: err.message });
-    if (row) return res.status(400).json({ success: false, message: `El email '${email}' ya está registrado` });
-
+  //db.get('SELECT id FROM usuarios WHERE email = ?', [email.toLowerCase()], (err, row) => {
+    //if (err) return res.status(500).json({ success: false, message: err.message });
+    //if (row) return res.status(400).json({ success: false, message: `El email '${email}' ya está registrado` });
     db.run('INSERT INTO usuarios (nombre, email, password, rol) VALUES (?, ?, ?, ?)',
       [nombre.trim(), email.toLowerCase(), password, rol || 'cliente'],
       function(err) {
@@ -80,7 +79,7 @@ router.post('/', (req, res) => {
       }
     );
   });
-});
+//});
 
 // ══════════════════════════════════════════════════════
 // PUT /usuarios/:id — Actualizar usuario
